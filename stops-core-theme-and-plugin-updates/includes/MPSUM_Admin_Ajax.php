@@ -451,7 +451,7 @@ class MPSUM_Admin_Ajax {
 		}
 		
 
-		if (isset($options['email_addresses']) && ! is_array($options['email_addresses'])) {
+		if (!isset($options['email_addresses']) || !is_array($options['email_addresses'])) {
 			$options['email_addresses'] = array();
 		}
 		$options['email_addresses'] = implode(',', $options['email_addresses']);

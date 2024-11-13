@@ -4,8 +4,8 @@ Tags: updates manager, easy updates manager, disable updates manager, disable up
 Requires at least: 5.1
 Requires PHP: 5.6
 Donate link: https://easyupdatesmanager.com
-Tested up to: 6.6
-Stable tag: 9.0.18
+Tested up to: 6.7
+Stable tag: 9.0.19
 License: GPLv2 or later
 
 Manage all your WordPress updates, including individual updates, automatic updates, logs, and loads more. This also works very well with WordPress Multisite.
@@ -126,8 +126,17 @@ For additional information and FAQs for Easy Updates Manager <a href="https://ea
 
 == Changelog ==
 
+= 9.0.19 - 2024-11-12 =
+
+* FIX: Misreporting of plugin's update statuses in notification emails, which were labeled "success" instead of the appropriate designation of "failed"
+* TWEAK: Improve the strategy for using an associative array to filter option default values, aiming to safeguard existing defaults from removal and to prevent the introduction of non-relevant options
+* TWEAK: The notification email should omit any "failed" update status for plugins, themes and translations if they lack the corresponding name and/or version number
+* TWEAK: Improve updates-check anonymisation and randomisation, stripping out further unnecessary data
+* TWEAK: Replace unnecessary calls to maybe_unserialize()
+
 = 9.0.18 - 2024-07-10 =
 
+* FIX: Couldn't reactivate plugins due to plugin dependency issues (Premium)
 * TWEAK: Allow auto-updates event from other plugins to take place only if it's in the same exact schedule with the auto-updates scheduling feature
 * TWEAK: Auto-updates should always run at the actual time the user has set it to be and prevent auto-updates event that runs outside the auto-updates scheduling feature
 * TWEAK: Fixed spelling errors in the repo
@@ -135,6 +144,7 @@ For additional information and FAQs for Easy Updates Manager <a href="https://ea
 * TWEAK: Force automatic updates should be independent and should not depend on the user-defined settings which can lead to the auto-updates itself being failed
 * TWEAK: Split multiple sentences into separate translation calls. 
 * TWEAK: Update the composer package yahnis-elsts/plugin-update-checker for PHP 8.2 compatibility
+* TWEAK: Plugin reactivations are now carried out in a specific sequence, with plugins lacking dependencies being reactivated first, followed by those with dependencies (Premium)
 
 = 9.0.17 - 2023-08-09 =
 
@@ -425,4 +435,4 @@ For past changelogs, <a href="https://easyupdatesmanager.com/blog/">please visit
 
 == Upgrade Notice ==
 
-* 9.0.18: Various tweaks and fixes. Force auto-updates can now be done with less capabilities and is not subject to any features or control of other features. See changelog for full details. A recommended update for all.
+* 9.0.19: Various tweaks and fixes. Improvement of update statuses in the update notification emails and updates-check anonymisation and randomisation. See changelog for full details. A recommended update for all.

@@ -61,8 +61,6 @@ class MPSUM_Send_Email_Notifications {
 		$body = array();
 		$failures = 0;
 
-		$body[] = sprintf(__('WordPress site: %s'), network_home_url('/'));
-
 		// Core
 		if ((!isset($core_options['notification_core_update_emails']) || 'on' === $core_options['notification_core_update_emails']) && isset($update_results['core'])) {
 			$result = $update_results['core'][0];
@@ -88,7 +86,15 @@ class MPSUM_Send_Email_Notifications {
 				}
 				continue;
 			}
-			$success_items = wp_list_filter($update_results[$type], array('result' => true));
+			$success_items = array();
+			foreach ($update_results[$type] as $key => $item) {
+				if ($item->result && !is_wp_error($item->result)) {
+					$success_items[] = $item;
+				} elseif (empty($item->name) || empty($item->item->current_version) || empty($item->item->new_version)) {
+					unset($update_results[$type][$key]);
+				}
+			}
+			$update_results[$type] = array_values($update_results[$type]);
 
 			if ($success_items) {
 				$messages = array(
@@ -108,6 +114,7 @@ class MPSUM_Send_Email_Notifications {
 						$body[] = ' * ' . sprintf(__('SUCCESS: %s'), $name);
 					}
 				}
+				$body[] = '';
 			}
 
 			if ($success_items !== $update_results[$type]) {
@@ -126,9 +133,8 @@ class MPSUM_Send_Email_Notifications {
 						$failures++;
 					}
 				}
+				$body[] = '';
 			}
-
-			$body[] = '';
 		}
 
 		$site_title = wp_specialchars_decode(get_bloginfo('name'), ENT_QUOTES);
@@ -139,11 +145,14 @@ class MPSUM_Send_Email_Notifications {
 			$subject = sprintf(__('[%s] Background Update Finished'), $site_title);
 		}
 
-		$body[] = trim(sprintf(__("Thanks! -- The %s team"), apply_filters('eum_whitelabel_name', __('Easy Updates Manager', 'stops-core-theme-and-plugin-updates'))));
-		$body[] = '';
-
-		$body[] = trim(__('UPDATE LOG =========='));
-		$body[] = '';
+		if (!empty($body)) {
+			array_unshift($body, sprintf(__('WordPress site: %s'), network_home_url('/')));
+			$body[] = trim(sprintf(__("Thanks! -- The %s team"), apply_filters('eum_whitelabel_name', __('Easy Updates Manager', 'stops-core-theme-and-plugin-updates'))));
+			$body[] = '';
+	
+			$body[] = trim(__('UPDATE LOG =========='));
+			$body[] = '';
+		}
 
 		if (!isset($core_options['notification_core_update_emails']) || 'on' === $core_options['notification_core_update_emails']) $entities[] = 'core';
 
@@ -189,14 +198,14 @@ class MPSUM_Send_Email_Notifications {
 				$body[] = '';
 			}
 		}
-		$email = array(
-			'to' => get_site_option('admin_email'),
-			'subject' => $subject,
-			'body' => implode("\n", $body),
-			'headers' => '',
-		);
-		$email = $this->maybe_change_automatic_update_email($email);
-		if (!empty($entities)) {
+		if (!empty($entities) && !empty($body)) {
+			$email = array(
+				'to' => get_site_option('admin_email'),
+				'subject' => $subject,
+				'body' => implode("\n", $body),
+				'headers' => '',
+			);
+			$email = $this->maybe_change_automatic_update_email($email);
 			wp_mail($email['to'], wp_specialchars_decode($email['subject']), $email['body'], $email['headers']);
 		}
 	}

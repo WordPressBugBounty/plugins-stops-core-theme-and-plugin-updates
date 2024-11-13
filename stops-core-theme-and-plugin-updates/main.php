@@ -5,7 +5,7 @@ Plugin Name: Easy Updates Manager
 Plugin URI: https://easyupdatesmanager.com
 Description: Manage and disable WordPress updates, including core, plugin, theme, and automatic updates - Works with Multisite and has built-in logging features.
 Author: Easy Updates Manager Team
-Version: 9.0.18
+Version: 9.0.19
 Update URI: https://wordpress.org/plugins/stops-core-theme-and-plugin-updates/
 Author URI: https://easyupdatesmanager.com
 Contributors: kidsguide, ronalfy
@@ -18,7 +18,7 @@ Network: true
 
 if (!defined('ABSPATH')) die('No direct access allowed');
 
-if (!defined('EASY_UPDATES_MANAGER_VERSION')) define('EASY_UPDATES_MANAGER_VERSION', '9.0.18');
+if (!defined('EASY_UPDATES_MANAGER_VERSION')) define('EASY_UPDATES_MANAGER_VERSION', '9.0.19');
 
 if (!defined('EASY_UPDATES_MANAGER_MAIN_PATH')) define('EASY_UPDATES_MANAGER_MAIN_PATH', plugin_dir_path(__FILE__));
 if (!defined('EASY_UPDATES_MANAGER_URL')) define('EASY_UPDATES_MANAGER_URL', plugin_dir_url(__FILE__));
@@ -215,6 +215,23 @@ if (!class_exists('MPSUM_Updates_Manager')) {
 			return $dir;
 		}
 
+		/**
+		 * Unserialize data while maintaining compatibility across PHP versions due to different number of arguments required by PHP's "unserialize" function
+		 *
+		 * @param string        $serialized_data Data to be unserialized, should be one that is already serialized
+		 * @param boolean|array $allowed_classes Either an array of class names which should be accepted, false to accept no classes, or true to accept all classes
+		 * @param integer       $max_depth       The maximum depth of structures permitted during unserialization, and is intended to prevent stack overflows
+		 * @return mixed Unserialized data can be any of types (integer, float, boolean, string, array or object)
+		 */
+		public static function unserialize($serialized_data, $allowed_classes = false, $max_depth = 0) {
+			if (version_compare(PHP_VERSION, '7.0', '<')) {
+				$result = unserialize($serialized_data);
+			} else {
+				$result = unserialize($serialized_data, array('allowed_classes' => $allowed_classes, 'max_depth' => $max_depth)); //phpcs:ignore PHPCompatibility.FunctionUse.NewFunctionParameters.unserialize_optionsFound
+			}
+			return $result;
+		}
+		
 		/**
 		 * Return the web path to an asset.
 		 *

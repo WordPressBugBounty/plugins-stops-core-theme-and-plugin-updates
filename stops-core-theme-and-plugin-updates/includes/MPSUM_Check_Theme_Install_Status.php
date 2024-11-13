@@ -105,7 +105,7 @@ class MPSUM_Check_Theme_Install_Status {
 			$themes = wp_get_themes(array('blog_id' => $blog_id));
 			$this->all_sites_active_themes[$blog_id] = array();
 			if (!empty($themes)) {
-				$this->all_sites_active_themes[$blog_id] = maybe_unserialize($themes);
+				$this->all_sites_active_themes[$blog_id] = MPSUM_Updates_Manager::unserialize($themes);
 			}
 		}
 		set_site_transient('eum_all_sites_active_themes', $this->all_sites_active_themes, 86400);

@@ -108,7 +108,7 @@ class MPSUM_Check_Plugin_Install_Status {
 			switch_to_blog($blog_id);
 			$option = get_option('active_plugins');
 			$this->all_sites_active_plugins[$blog_id] = array();
-			$this->all_sites_active_plugins[$blog_id] = maybe_unserialize($option);
+			$this->all_sites_active_plugins[$blog_id] = MPSUM_Updates_Manager::unserialize($option);
 		}
 		restore_current_blog();
 		set_site_transient('eum_all_sites_active_plugins', $this->all_sites_active_plugins, 86400);

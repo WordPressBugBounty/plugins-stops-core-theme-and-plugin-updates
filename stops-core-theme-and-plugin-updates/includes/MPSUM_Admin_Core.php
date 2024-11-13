@@ -46,6 +46,8 @@ class MPSUM_Admin_Core {
 	 * Get tab defaults.
 	 *
 	 * Get default core plugin options.
+	 * Use array_intersect_key to ensure that only options that are keyed that reflect to the $default_options_values being fetched and eliminate the rest which are considered as unrelated options
+	 * Use wp_parse_args to add back the default options that are not being defined or processed during the filteritation
 	 *
 	 * @since 5.0.0
 	 * @access static
@@ -54,14 +56,7 @@ class MPSUM_Admin_Core {
 	 */
 	public static function get_defaults() {
 
-		/**
-		 * Filter the default plugin configuration.
-		 *
-		 * @since 6.0.5
-		 *
-		 * @param array    associative array of options
-		 */
-		return (array) apply_filters('mpsum_default_options', array(
+		$default_option_values = array(
 			'all_updates'                     => 'on',
 			'version_control'                 => 'off',
 			'core_updates'                    => 'on',
@@ -76,7 +71,19 @@ class MPSUM_Admin_Core {
 			'plugin_auto_updates_notification_emails' => 'on',
 			'theme_auto_updates_notification_emails' => 'on',
 			'translation_auto_updates_notification_emails' => 'on',
-		));
+		);
+
+		/**
+		 * Filter the default plugin configuration.
+		 *
+		 * @since 6.0.5
+		 *
+		 * @param array    associative array of options
+		 */
+		$filtered_option_values = array_intersect_key((array) apply_filters('mpsum_default_options', $default_option_values), $default_option_values);
+
+		return wp_parse_args($filtered_option_values, $default_option_values);
+
 	}
 
 	/**

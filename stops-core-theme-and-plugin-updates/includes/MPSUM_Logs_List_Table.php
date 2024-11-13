@@ -620,8 +620,8 @@ class MPSUM_Logs_List_Table extends MPSUM_List_Table {
 	 * @param string $stacktrace raw stacktrace data
 	 * @return array
 	 */
-	public function get_stacktrace_column($stacktrace) {
-		$stacktrace = maybe_unserialize($stacktrace);
+	private function get_stacktrace_column($stacktrace) {
+		$stacktrace = is_serialized($stacktrace) ? MPSUM_Updates_Manager::unserialize($stacktrace) : $stacktrace;
 		if (!is_array($stacktrace)) $stacktrace = array();
 		$trace = array_reverse($stacktrace);
 		$stackrarr = array();
