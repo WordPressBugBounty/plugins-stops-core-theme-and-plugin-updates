@@ -5,8 +5,8 @@ if (!defined('ABSPATH')) die('No direct access allowed');
 
 <div class="updraft-ad-container updated">
 	<div class="updraft_notice_container">
-		<div class="updraft_advert_content_left">
-			<img src="<?php echo esc_url(EASY_UPDATES_MANAGER_URL.'images/'.$image); ?>" width="60" height="60" alt="<?php esc_attr_e('notice image', 'stops-core-theme-and-plugin-updates'); ?>" />
+		<div class="updraft_advert_content_left"<?php echo ('black_friday' == $button_meta) ? ' style="width:112px"' : ''; ?>>
+			<img src="<?php echo esc_url(EASY_UPDATES_MANAGER_URL.'images/'.$image); ?>" width="<?php echo isset($image_width) ? esc_attr($image_width) : '60'; ?>" height="<?php echo isset($image_height) ? esc_attr($image_height) : '60'; ?>" alt="<?php esc_attr_e('notice image', 'stops-core-theme-and-plugin-updates'); ?>" />
 		</div>
 		<div class="updraft_advert_content_right">
 			<h3 class="updraft_advert_heading">
@@ -27,6 +27,11 @@ if (!defined('ABSPATH')) die('No direct access allowed');
 				echo wp_kses_post($text);
 					$button_text = '';
 					if (isset($discount_code)) echo ' <b>' . esc_html($discount_code) . '</b>';
+					if (isset($disc_text1)) echo '<br>'.wp_kses_post($disc_text1);
+					if (isset($disc_text2)) echo '<br>'.wp_kses_post($disc_text2);
+					if (isset($disc_text3)) echo '<br>'.wp_kses_post($disc_text3);
+
+					if (isset($disc_text1) || isset($disc_text2) || isset($disc_text3)) echo '<br>';
 
 					if (!empty($button_link) && !empty($button_meta)) {
 					// Check which Message is going to be used.
@@ -50,8 +55,11 @@ if (!defined('ABSPATH')) die('No direct access allowed');
 						$button_text = __('Get premium', 'stops-core-theme-and-plugin-updates');
 					} elseif ('collection' == $button_meta) {
 						$button_text = __('Read more', 'stops-core-theme-and-plugin-updates');
+					} elseif ('black_friday' == $button_meta) {
+						$button_text = __('Get my Black Friday discount', 'stops-core-theme-and-plugin-updates');
 					}
-					$easy_updates_manager->easy_updates_manager_url($button_link, $button_text, null, 'class="updraft_notice_link"');
+					$eum_button_link_class = isset($button_link_class) ? $button_link_class : 'class="updraft_notice_link"';
+					$easy_updates_manager->easy_updates_manager_url($button_link, $button_text, null, $eum_button_link_class);
 					}
 				?>
 			</p>

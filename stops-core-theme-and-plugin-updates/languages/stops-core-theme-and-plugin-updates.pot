@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Team Updraft <mail@example.com>\n"
 "Last-Translator: Team Updraft <mail@example.com>\n"
-"POT-Creation-Date: 2026-08-31 21:54+0000\n"
+"POT-Creation-Date: 2026-11-10 14:53+0000\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/stops-core-theme-and-plugin-updates\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -97,12 +97,41 @@ msgstr ""
 msgid "Make your site fast and efficient with our cutting-edge speed optimization plugin."
 msgstr ""
 
-#: src/includes/easy-updates-manager-notices.php:88
-msgid "Black Friday - 20% off Easy Updates Manager Premium until November 30th"
+#: src/includes/easy-updates-manager-notices.php:88, src/includes/easy-updates-manager-notices.php:107
+msgid "This Black Friday Only"
 msgstr ""
 
 #: src/includes/easy-updates-manager-notices.php:89
-msgid "To benefit, use this discount code:"
+msgid "We're not going to do this again soon!"
+msgstr ""
+
+#. translators: %1$s: opening HTML <b> tag, %2$s: closing HTML </b> tag, $3$s: coupon code
+#: src/includes/easy-updates-manager-notices.php:91
+msgid "%1$sGet 30%% off Easy Updates Manager Premium%2$s with coupon code: %3$s"
+msgstr ""
+
+#: src/includes/easy-updates-manager-notices.php:108
+msgid "We’re not going to do this again soon."
+msgstr ""
+
+#. translators: %1$s: opening HTML <b> tag, %2$s: closing HTML </b> tag
+#: src/includes/easy-updates-manager-notices.php:110
+msgid "%1$sUp to 75%% off%2$s our other essential Wordpress tools."
+msgstr ""
+
+#. translators: %1$s: opening HTML <b> tag, %2$s: closing HTML </b> tag, $3$s: coupon code
+#: src/includes/easy-updates-manager-notices.php:112
+msgid "%1$sSave 40%% on UpdraftPlus Premium%2$s with coupon code: %3$s"
+msgstr ""
+
+#. translators: %1$s: opening HTML <b> tag, %2$s: closing HTML </b> tag, $3$s: coupon code
+#: src/includes/easy-updates-manager-notices.php:114
+msgid "%1$sSave 40%% on WP-Optimize Premium%2$s with coupon code: %3$s"
+msgstr ""
+
+#. translators: %1$s: opening HTML <b> tag, %2$s: closing HTML </b> tag, $3$s: coupon code
+#: src/includes/easy-updates-manager-notices.php:116
+msgid "%1$sSave 75%% on AIOS Premium%2$s with coupon code: %3$s"
 msgstr ""
 
 #: src/includes/MPSUM_Admin.php:294
@@ -2103,43 +2132,47 @@ msgstr ""
 msgid "notice image"
 msgstr ""
 
-#: src/templates/notices/horizontal-notice.php:52
+#: src/templates/notices/horizontal-notice.php:59
+msgid "Get my Black Friday discount"
+msgstr ""
+
+#: src/templates/notices/horizontal-notice.php:57
 msgid "Read more"
 msgstr ""
 
-#: src/templates/notices/horizontal-notice.php:50
+#: src/templates/notices/horizontal-notice.php:55
 msgid "Get premium"
 msgstr ""
 
-#: src/templates/notices/horizontal-notice.php:48
+#: src/templates/notices/horizontal-notice.php:53
 msgid "Get AIOS"
 msgstr ""
 
-#: src/templates/notices/horizontal-notice.php:46
+#: src/templates/notices/horizontal-notice.php:51
 msgid "Get WP-Optimize"
 msgstr ""
 
-#: src/templates/notices/horizontal-notice.php:44
+#: src/templates/notices/horizontal-notice.php:49
 msgid "Find out more."
 msgstr ""
 
-#: src/templates/notices/horizontal-notice.php:42
+#: src/templates/notices/horizontal-notice.php:47
 msgid "Go there"
 msgstr ""
 
-#: src/templates/notices/horizontal-notice.php:40
+#: src/templates/notices/horizontal-notice.php:45
 msgid "Sign up"
 msgstr ""
 
-#: src/templates/notices/horizontal-notice.php:38
+#: src/templates/notices/horizontal-notice.php:43
 msgid "Get UpdraftPlus"
 msgstr ""
 
-#: src/templates/notices/horizontal-notice.php:36
+#: src/templates/notices/horizontal-notice.php:41
 msgid "Review \"Easy Updates Manager\""
 msgstr ""
 
-#: src/templates/notices/horizontal-notice.php:34
+#: src/templates/notices/horizontal-notice.php:39
 msgid "Get UpdraftCentral"
 msgstr ""
 

@@ -5,7 +5,7 @@ Requires at least: 5.1
 Requires PHP: 5.6
 Donate link: https://easyupdatesmanager.com
 Tested up to: 7.1
-Stable tag: 9.0.22
+Stable tag: 9.0.24
 License: GPLv2 or later
 
 Manage all your WordPress updates, including individual updates, automatic updates, logs, and loads more. This also works very well with WordPress Multisite.
@@ -125,6 +125,14 @@ Since third-party providers use custom update mechanisms, we cannot always guara
 For additional information and FAQs for Easy Updates Manager <a href="https://easyupdatesmanager.com">check out our website</a>.
 
 == Changelog ==
+
+= 9.0.24 - 2026-11-10 =
+
+* TWEAK: Updated notices to include information about the 2026 Black Friday campaign.
+
+= 9.0.23 - 2026-10-05 =
+
+* FIX: Prevented a fatal TypeError during obsolete delayed entity removal by returning immediately for unsupported WP_Upgrader subclasses, such as language translation updates.
 
 = 9.0.22 - 2026-08-31 =
 
@@ -458,4 +466,4 @@ For past changelogs, <a href="https://easyupdatesmanager.com/blog/">please visit
 
 == Upgrade Notice ==
 
-* 9.0.22: Various tweaks and fixes. A recommended update for all.
+* 9.0.24: Black Friday promotional materials. A recommended update for all.

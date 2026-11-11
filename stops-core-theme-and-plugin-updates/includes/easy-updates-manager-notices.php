@@ -83,19 +83,48 @@ class Easy_Updates_Manager_Notices extends Updraft_Notices_1_2 {
 			),
 
 			// The sale adverts content starts here
-			'blackfriday' => array(
+			'blackfriday_upsell' => array(
 				'prefix' => '',
-				'title' => __('Black Friday - 20% off Easy Updates Manager Premium until November 30th', 'stops-core-theme-and-plugin-updates'),
-				'text' => __('To benefit, use this discount code:', 'stops-core-theme-and-plugin-updates') . ' ',
+				'title' => __('This Black Friday Only', 'stops-core-theme-and-plugin-updates'),
+				'text' => __("We're not going to do this again soon!", 'stops-core-theme-and-plugin-updates').' ',
+				/* translators: %1$s: opening HTML <b> tag, %2$s: closing HTML </b> tag, $3$s: coupon code */
+				'disc_text1' => sprintf(__('%1$sGet 30%% off Easy Updates Manager Premium%2$s with coupon code: %3$s', 'stops-core-theme-and-plugin-updates'), '<b>', '</b>', '<b>BLACKFRIDAY30</b>').' ',
 				'image' => 'notices/black_friday.png',
-				'button_link' => 'https://easyupdatesmanager.com/',
-				'button_meta' => 'eum_premium',
+				'image_width' => 100,
+				'image_height' => 100,
+				'button_link' => 'https://easyupdatesmanager.com/black-friday/?utm_source=eum-free-plugin-banner&utm_medium=in-plugin&utm_campaign=black-friday&utm_content=eum-free-banner',
+				'button_link_class' => '',
+				'button_meta' => 'black_friday',
 				'dismiss_time' => 'dismiss_season_notice_until',
-				'discount_code' => 'blackfridaysale2022',
-				'valid_from' => '2022-11-20 00:00:00',
-				'valid_to' => '2022-11-30 23:59:59',
+				'valid_from' => '2026-11-13 00:00:00',
+				'valid_to' => '2026-12-02 23:59:59',
 				'supported_positions' => $this->dashboard_top_or_report,
 				'validity_function' => 'is_premium_installed',
+			),
+
+			'blackfriday_cross_sell' => array(
+				'prefix' => '',
+				'title' => __('This Black Friday Only', 'stops-core-theme-and-plugin-updates'),
+				'text' => __("We’re not going to do this again soon.", 'stops-core-theme-and-plugin-updates').' '.
+				/* translators: %1$s: opening HTML <b> tag, %2$s: closing HTML </b> tag */
+				sprintf(__('%1$sUp to 75%% off%2$s our other essential Wordpress tools.', 'stops-core-theme-and-plugin-updates'), '<b>', '</b>').' ',
+				/* translators: %1$s: opening HTML <b> tag, %2$s: closing HTML </b> tag, $3$s: coupon code */
+				'disc_text1' => sprintf(__('%1$sSave 40%% on UpdraftPlus Premium%2$s with coupon code: %3$s', 'stops-core-theme-and-plugin-updates'), '<b>', '</b>', '<b>EUMUDPVIP26</b>').' ',
+				/* translators: %1$s: opening HTML <b> tag, %2$s: closing HTML </b> tag, $3$s: coupon code */
+				'disc_text2' => sprintf(__('%1$sSave 40%% on WP-Optimize Premium%2$s with coupon code: %3$s', 'stops-core-theme-and-plugin-updates'), '<b>', '</b>', '<b>EUMWPOVIP26</b>').' ',
+				/* translators: %1$s: opening HTML <b> tag, %2$s: closing HTML </b> tag, $3$s: coupon code */
+				'disc_text3' => sprintf(__('%1$sSave 75%% on AIOS Premium%2$s with coupon code: %3$s', 'stops-core-theme-and-plugin-updates'), '<b>', '</b>', '<b>EUMAIOSVIP26</b>').' ',
+				'image' => 'notices/black_friday.png',
+				'image_width' => 100,
+				'image_height' => 100,
+				'button_link' => 'https://teamupdraft.com/black-friday-plugin-premium-eum/?utm_source=eum-premium-plugin-banner&utm_medium=in-plugin&utm_campaign=black-friday&utm_content=eum-premium-banner',
+				'button_link_class' => '',
+				'button_meta' => 'black_friday',
+				'dismiss_time' => 'dismiss_season_notice_until',
+				'valid_from' => '2026-11-13 00:00:00',
+				'valid_to' => '2026-12-02 23:59:59',
+				'supported_positions' => $this->dashboard_top_or_report,
+				'validity_function' => 'should_show_premium_cross_sell',
 			)
 		);
 
@@ -167,6 +196,14 @@ class Easy_Updates_Manager_Notices extends Updraft_Notices_1_2 {
 		return MPSUM_Updates_Manager::get_instance()->is_premium() ? false : true;
 	}
 
+	/**
+	 * Determine whether the Premium version is currently being used for cross-selling.
+	 *
+	 * @return bool True if the Premium version is active, false otherwise.
+	 */
+	protected function should_show_premium_cross_sell() {
+		return MPSUM_Updates_Manager::get_instance()->is_premium();
+	}
 
 	/**
 	 * This method calls the parent version and will work out if the user is using a non english language and if so returns true so that they can see the translation advert.
